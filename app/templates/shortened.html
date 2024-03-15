@@ -26,6 +26,7 @@
 <body>
     <h2>Your shortened URL:</h2>
     <p><a href="{{ short_url }}", target="_blank">{{ short_url }}</a></p>
+       <img src="/qrcode?url={{ short_url }}" alt="QR Code for {{ short_url }}">
 <!-- 
     <h2>QR Code:</h2>
     <p>Here is the QR code for the shortened URL:</p>
@@ -40,10 +41,10 @@
 </html>
 
 
-
-<!--<a href="/qrcode?url={{ short_url }}" download="qrcode.png">-->
+<!-- 
+<a href="/qrcode?url={{ short_url }}" download="qrcode.png">-->
 <!--    <img src="/qrcode?url={{ short_url }}" alt="QR Code for {{ short_url }}">-->
-<!--</a>-->
+<!--</a> -->
 
 
 <!--<!DOCTYPE html>-->
