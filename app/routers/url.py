@@ -82,6 +82,32 @@ async def download_qr_code(url: str):
     )
 
 
+    
+@url_router.get("/analytics_form")
+async def show_analytics_form(request: Request):
+    return templates.TemplateResponse("analytics_form.html", {"request": request})
+
+
+@url_router.get("/analytics",response_class=HTMLResponse)
+async def get_url_analytics(request: Request, short_url: str, db: Session = Depends(get_db)):
+    db_url = db.query(URL).filter(URL.short_url == short_url).first()
+   
+    if db_url:
+        
+        return templates.TemplateResponse(
+            "analytics.html",
+            {
+                "request": request,
+                "short_url": short_url,
+                "clicks": db_url.clicks,
+              
+            }
+        )
+    else:
+        raise HTTPException(status_code=404, detail="Short URL not found")
+     
+
+
 @url_router.get("/{short_url}")
 async def redirect_to_long_url(short_url: str, db: Session = Depends(get_db)):
     original_url = db.query(URL).filter(URL.short_url == short_url).first()
@@ -91,25 +117,6 @@ async def redirect_to_long_url(short_url: str, db: Session = Depends(get_db)):
         db.add(clicks)
         db.commit()
         db.refresh(clicks)
-        return RedirectResponse(original_url.long_url, status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+        return RedirectResponse(original_url.long_url, status_code=status.HTTP_307_TEMPORARY_REDIRECT)    
     else:
         raise HTTPException(status_code=404, detail="URL not found")
-
-
-@url_router.get("/analytics/{short_url}", response_class=HTMLResponse)
-async def get_url_analytics(request: Request, short_url: str, db: Session = Depends(get_db)):
-    db_url = db.query(URL).filter(URL.short_url == short_url).first()
-    click_data = db.query(Click).all()
-    if db_url:
-        # Render analytics page with total click count
-        return templates.TemplateResponse(
-            "analytics.html",
-            {
-                "request": request,
-                "short_url": short_url,
-                "clicks": db_url.clicks,
-                "click_data": click_data
-            }
-        )
-    else:
-        raise HTTPException(status_code=404, detail="Short URL not found")

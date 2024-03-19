@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -46,14 +46,14 @@
           </tr>
         </thead>
         <tbody>
-            {% for url in urls %}
+            <!-- {% for url in urls %} -->
           <tr>
             <th scope="row"> url.id </th>
             <td><a href="{{ url.long_url }}">{{url.long_url}}</a></td>
             <td></td>
             <td><a href="{{ url.short_url }}">{{url.short_url}}</a></td>
           </tr>
-          {% endfor %}
+          <!-- {% endfor %} -->
         </tbody>
       </table>
 </body>

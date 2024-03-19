@@ -7,57 +7,79 @@
     <link rel="stylesheet"
           type="text/css"
           href="{{ url_for('static', path='/url/css/style.css') }}">
-    <style >h1{
-        color: white;
-        font-size: 30px;
-        
-    }
-        .r h1 .form{
-            border-radius: 30px;
-        background-color: brown;
-        }
-    
-    body{
-    background-color:rgb(5, 27, 11);
-        
-    }
-    .rm{
-        color:rgb(3, 9, 29);
-        background-color: orange;
-        border-radius: 5px;
-    }
-    
-    </style>  
     <style>
-        .rm:hover{
-            background-color: white;
-            
+        body {
+            background-color: rgb(5, 27, 11);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    </style>       
+
+        .r {
+            text-align: center;
+            margin-top: 20vh; 
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="url"],
+        input[type="text"],
+        .rm {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; 
+        }
+        
+
+        .rm {
+            width: 100%;
+            max-width: 300px; 
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: orange;
+            color: rgb(3, 9, 29);
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .rm:hover {
+            background-color: white;
+        }
+
+        @media (max-width: 768px) {
+            .r {
+                margin-top: 10vh; 
+            }
+        }
+    </style>
 </head>
 <body>
-    
     <div class="r">
-    <h1>URL Shortener</h1>
-    <form action="/shorten/" method="post">
-        <input type="url" name="long_url" placeholder="Enter URL">
-        <input type="text" name="custom_url" placeholder="Enter Custom URL">
-        <button type="submit" class="rm">shorten</button>
-    </form>
-</div>
-
-<!-- <h2>Your shortened URL:</h2>
-<p><a href="{{ short_url }}", target="_blank">{{ short_url }}</a></p>
-
-<h2>QR Code:</h2>
-<p>Here is the QR code for the shortened URL:</p>
-<img src="/qrcode?url={{ long_url }}" alt="QR Code for {{ long_url }}">
-
-<h2>Download QR Code:</h2>
-<p>Click the button below to download the QR code image:</p>
-<a href="/qrcode?url={{ long_url }}" download="qrcode.png">
-    <button>Download QR Code</button>
-</a> -->
+        <h1>URL Shortener</h1>
+        <form action="/shorten/" method="post">
+            <input type="url" name="long_url" placeholder="Enter URL">
+            <input type="text" name="custom_url" placeholder="Enter Custom URL">
+            <button type="submit" class="rm">Shorten</button>
+        </form>
+    </div>
 </body>
 </html>
 
